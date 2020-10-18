@@ -14,7 +14,7 @@ public static class FileManagement
 
 			if (!File.Exists(path))
 			{
-				Logger.Write($"File not found at {path}", LoggerType.ERROR);
+				Logger.Write($"File not found at {path}", LogType.ERROR);
 				return "";
 			}
 
@@ -22,7 +22,7 @@ public static class FileManagement
 		}
 		catch (Exception e)
 		{
-			Logger.Write(e.ToString(), LoggerType.ERROR);
+			Logger.Write(e.ToString(), LogType.ERROR);
 			return "";
 		}
 	}
@@ -36,7 +36,7 @@ public static class FileManagement
 
 			if (!File.Exists(path))
 			{
-				Logger.Write($"File not found at {path}", LoggerType.ERROR);
+				Logger.Write($"File not found at {path}", LogType.ERROR);
 				return;
 			}
 
@@ -44,7 +44,7 @@ public static class FileManagement
 		}
 		catch (Exception e)
 		{
-			Logger.Write(e.ToString(), LoggerType.ERROR);
+			Logger.Write(e.ToString(), LogType.ERROR);
 		}
 	}
 
