@@ -5,12 +5,6 @@
             "Message_Content": "Hello World",
             "Message_Time": "",
             "User_Id": 0
-        },
-        {
-            "Message_Id": 1,
-            "Message_Content": "AH",
-            "Message_Time": "Test",
-            "User_Id": 11
         }
     ],
     "positions_messages": [

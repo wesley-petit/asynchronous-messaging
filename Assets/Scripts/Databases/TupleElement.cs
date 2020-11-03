@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System;
 
 // Each name (attribute and type) must be the same as the JSON
 /* ==================================================== Tuple Element ======================================================== */
@@ -13,8 +12,8 @@ public interface ITuple
 	bool IsNull();
 }
 
-[Serializable]
-public struct Messages : ITuple
+[System.Serializable]
+public struct Message : ITuple
 {
 	[SerializeField] private int Message_Id;
 	[SerializeField] private string Message_Content;
@@ -27,7 +26,7 @@ public struct Messages : ITuple
 	public int UserId => User_Id;
 	#endregion
 
-	public Messages(int messageId, string messageContent, string messageTime, int userId)
+	public Message(int messageId, string messageContent, string messageTime, int userId)
 	{
 		Message_Id = messageId;
 		Message_Content = messageContent;
@@ -48,8 +47,8 @@ public struct Messages : ITuple
 	}
 }
 
-[Serializable]
-public struct Positions_Messages : ITuple
+[System.Serializable]
+public struct Position_Messages : ITuple
 {
 	[SerializeField] private int Position_Id;
 	// Double[] because we can't save a vector 3 in a json file
@@ -63,7 +62,7 @@ public struct Positions_Messages : ITuple
 	public int MessageId => Message_Id;
 	#endregion
 
-	public Positions_Messages(int positionId, Vector3 positionMessage, Vector3 rotationMessage, int messageId)
+	public Position_Messages(int positionId, Vector3 positionMessage, Vector3 rotationMessage, int messageId)
 	{
 		Position_Id = positionId;
 		Position_Message = new double[3];
@@ -97,15 +96,15 @@ public struct Positions_Messages : ITuple
 	}
 }
 
-[Serializable]
-public struct Users : ITuple
+[System.Serializable]
+public struct User : ITuple
 {
 	[SerializeField] private int User_Id;
 	[SerializeField] private string User_Name;
 
 	public string UserName => User_Name;
 
-	public Users(int userId, string userName)
+	public User(int userId, string userName)
 	{
 		User_Id = userId;
 		User_Name = userName;

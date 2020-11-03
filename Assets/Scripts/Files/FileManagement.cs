@@ -26,6 +26,26 @@ public static class FileManagement
 			return "";
 		}
 	}
+	
+	public static string[] ReadAllLines(string fileName)
+	{
+		try
+		{
+			string path = GetFilePath(fileName);
+			if (!File.Exists(path))
+			{
+				Debug.LogError($"File not found at {path}");
+				return new string[0];
+			}
+
+			return File.ReadAllLines(path);
+		}
+		catch (Exception e)
+		{
+			Debug.LogError(e);
+			return new string[0];
+		}
+	}
 
 	public static void Write(string fileName, string content)
 	{
@@ -48,7 +68,7 @@ public static class FileManagement
 		}
 	}
 
-	// Use to add a log line
+	// Use to add a log line / Create a file if it doesn't exist
 	public static void Append(string fileName, string content)
 	{
 		try
@@ -56,8 +76,7 @@ public static class FileManagement
 			string path = GetFilePath(fileName);
 			if (!File.Exists(path))
 			{
-				Debug.LogWarning($"File not found at {path}");
-				return;
+				Debug.LogWarning($"File not found at {path}. Let there be a file.");
 			}
 
 			File.AppendAllText(path, content);

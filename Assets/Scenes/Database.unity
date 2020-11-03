@@ -150,10 +150,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _mainDatabase:
-    messages: []
-    positions_messages: []
-    users: []
-    messages_premades: []
+    messages:
+    - Message_Id: 0
+      Message_Content: Hello World
+      Message_Time: 
+      User_Id: 0
+    - Message_Id: 0
+      Message_Content: Hello World
+      Message_Time: 
+      User_Id: 0
+    positions_messages:
+    - Position_Id: 0
+      Position_Message:
+      - 0
+      - 0
+      - 0
+      Rotation_Message:
+      - 0
+      - 0
+      - 0
+      Message_Id: 0
+    - Position_Id: 0
+      Position_Message:
+      - 0
+      - 0
+      - 0
+      Rotation_Message:
+      - 0
+      - 0
+      - 0
+      Message_Id: 0
+    users:
+    - User_Id: 0
+      User_Name: NullException
+    - User_Id: 0
+      User_Name: NullException
+    messages_premades:
+    - HELLO WORLD
+    - Nice day for fishing, ain't it?
+    - Nice day for fishing, ain't it?
 --- !u!4 &205421144
 Transform:
   m_ObjectHideFlags: 0
