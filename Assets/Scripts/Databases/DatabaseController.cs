@@ -59,10 +59,10 @@ public class DatabaseController : MonoBehaviour
 	// If a foreign key exist or not
 	#region Is This Element Exist
 	// Easier to use
-	public bool IsThisMessageExist(int searchId) => IsThisElementExist(_mainDatabase.Messages, k => k.Id() == searchId, searchId);
-	public bool IsThisPositionMessageExist(int searchId) => IsThisElementExist(_mainDatabase.Positions_Messages, k => k.Id() == searchId, searchId);
-	public bool IsThisUserExist(int searchId) => IsThisElementExist(_mainDatabase.Users, k => k.Id() == searchId, searchId);
-	private bool IsThisElementExist<T>(List<T> searchList, Func<T, bool> predicate, int searchId)
+	public bool IsThisMessageInDatabase(int searchId) => IsThisInDatabase(_mainDatabase.Messages, k => k.Id() == searchId, searchId);
+	public bool IsThisPositionMessageInDatabase(int searchId) => IsThisInDatabase(_mainDatabase.Positions_Messages, k => k.Id() == searchId, searchId);
+	public bool IsThisUserInDatabase(int searchId) => IsThisInDatabase(_mainDatabase.Users, k => k.Id() == searchId, searchId);
+	private bool IsThisInDatabase<T>(List<T> searchList, Func<T, bool> predicate, int searchId)
 	{
 		bool res = searchList.Any(predicate);
 		if (!res)

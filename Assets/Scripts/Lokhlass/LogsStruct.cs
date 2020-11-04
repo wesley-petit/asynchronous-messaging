@@ -22,7 +22,9 @@ public struct ColorByLogType
 {
 	[SerializeField] private LogType _type;
 	[SerializeField] private Color[] _colors;
+	[SerializeField] private Color _textColor;
 
 	public LogType Type => _type;
 	public Color[] Colors => _colors;
+	public Color TextColor => _textColor;
 }
