@@ -1,9 +1,8 @@
 ﻿using UnityEngine;
-using System;
 using System.Collections.Generic;
 
 // Each name (attribute and type) must be the same as the JSON
-[Serializable]
+[System.Serializable]
 public class Database
 {
 	[SerializeField] private List<Message> messages = new List<Message>();

@@ -15,6 +15,7 @@ public class DatabaseController : MonoBehaviour
 	private int _maxMessageId = 0;
 	private int _maxPositionMessageId = 0;
 	private int _maxUserId = 0;
+	private float _aroundThreshold = 5f;							// Define when a message is near a player
 
 	private void Awake()
 	{
@@ -23,6 +24,31 @@ public class DatabaseController : MonoBehaviour
 	}
 
 	#region Get Element By Predicate
+	public HashSet<Message> GetMessagesByPlayerPosition(Vector3 playerPosition)
+	{
+		// Doesn't allow doublons and it's more efficient to add an item (like a List)
+		HashSet<Message> messages = new HashSet<Message>();
+		Message currentMessage = new Message();
+		
+		// Take all position in a certain area around the player
+		Position_Messages[] positions = _mainDatabase.Positions_Messages.Where(
+												k => Vector3.Distance(k.PositionMessage, playerPosition) < _aroundThreshold)
+												.ToArray();
+
+		// Take all messages in this positions
+		foreach (var position in positions)
+		{
+			currentMessage = GetMessageByPredicate(k => k.Id() == position.MessageId);
+			
+			if (!currentMessage.IsNull())
+			{
+				messages.Add(currentMessage);
+			}
+		}
+
+		return messages;
+	}
+
 	// Easier to use
 	public Message GetMessageByPredicate(Func<Message, bool> predicate) => GetElementByPredicate(_mainDatabase.Messages, predicate);
 	public Position_Messages GetPositionByPredicate(Func<Position_Messages, bool> predicate) => GetElementByPredicate(_mainDatabase.Positions_Messages, predicate);
