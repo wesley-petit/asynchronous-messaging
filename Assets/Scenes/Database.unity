@@ -149,14 +149,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ac4fcdcec91e11478ffe56cb5c2179a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _mainDatabase:
+  _database:
     messages:
-    - User_Name: NullException2
-      Message_Content: Hello World
-      Message_Time: Today
-      Position_Message: {x: 4.9, y: 0, z: 0}
+    - User_Name: NullReferenceException
+      Message_Content: Hello World !
+      Message_Time: 2020-11-13
+      Position_Message: {x: 5, y: 5, z: 5}
     messages_premades:
-    - HELLO WORLD
     - Nice day for fishing, ain't it?
   _aroundThreshold: 5
 --- !u!4 &205421144

@@ -4,7 +4,7 @@ using UnityEngine;
 
 // Give Access in data
 public class DatabaseController : MonoBehaviour
-{
+{ 
 	[SerializeField] private Database _database = new Database();
 	[SerializeField] private float _aroundThreshold = 5f;			// Define when a message is near a player
 
@@ -42,7 +42,7 @@ public class DatabaseController : MonoBehaviour
 			return;
 		}
 
-		if (message.ContainsNullValues)
+		if (message.ContainsNullValues || message.IsEmpty)
 		{
 			Logger.Write($"Can't add a Message which contains null values", LogType.ERROR);
 			return;

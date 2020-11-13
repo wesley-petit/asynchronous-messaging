@@ -1,36 +1,17 @@
 {
     "messages": [
         {
-            "Message_Id": 0,
-            "Message_Content": "Hello World",
-            "Message_Time": "",
-            "User_Id": 0
-        }
-    ],
-    "positions_messages": [
-        {
-            "Position_Id": 0,
-            "Position_Message": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "Rotation_Message": [
-                0.0,
-                0.0,
-                0.0
-            ],
-            "Message_Id": 0
-        }
-    ],
-    "users": [
-        {
-            "User_Id": 0,
-            "User_Name": "NullException"
+            "User_Name": "NullReferenceException",
+            "Message_Content": "Hello World !",
+            "Message_Time": "2020-11-13",
+            "Position_Message": {
+                "x": 5.0,
+                "y": 5.0,
+                "z": 5.0
+            }
         }
     ],
     "messages_premades": [
-        "HELLO WORLD",
         "Nice day for fishing, ain't it?"
     ]
 }
