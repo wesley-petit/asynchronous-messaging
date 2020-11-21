@@ -1,0 +1,17 @@
+{
+    "messages": [
+        {
+            "User_Name": "NullReferenceException",
+            "Message_Content": "Hello World !",
+            "Message_Time": "2020-11-13",
+            "Position_Message": {
+                "x": 5.0,
+                "y": 5.0,
+                "z": 5.0
+            }
+        }
+    ],
+    "messages_premades": [
+        "Nice day for fishing, ain't it?"
+    ]
+}

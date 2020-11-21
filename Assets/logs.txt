@@ -1,0 +1,24 @@
+[2020-10-23 - 20:35:11] Load Database... 
+[2020-10-23 - 20:35:11] Read File D:/Documents/GitKraken/asynchronous_messaging/Assets\database.json 
+[2020-10-23 - 20:35:11] Initializing Max Id 
+[2020-10-23 - 20:35:11] Clear Doublons 
+[2020-10-23 - 20:36:19] Load Database... 
+[2020-10-23 - 20:36:19] Read File D:/Documents/GitKraken/asynchronous_messaging/Assets\database.json 
+[2020-10-23 - 20:36:19] Initializing Max Id 
+[2020-10-23 - 20:36:19] Clear Doublons 
+[2020-10-23 - 20:52:16] Load Database... 
+[2020-10-23 - 20:52:16] Read File D:/Documents/GitKraken/asynchronous_messaging/Assets\database.json 
+[2020-10-23 - 20:52:16] Initializing Max Id 
+[2020-10-23 - 20:52:16] Clear Doublons
+[2020-11-03 - 19:11:25] Load Database... 
+[2020-11-03 - 19:11:25] Read File D:/Documents/GitKraken/asynchronous_messaging/Assets\database.json 
+[2020-11-03 - 19:11:25] Initializing Max Id 
+[2020-11-03 - 19:11:25] Clear Doublons 
+[2020-11-04 - 19:35:16] Load Database... 
+[2020-11-04 - 19:35:16] Read File D:/Documents/GitKraken/asynchronous_messaging/Assets\database.json 
+[2020-11-04 - 19:35:16] Initializing Max Id 
+[2020-11-04 - 19:35:16] Clear Doublons 
+[2020-11-04 - 19:42:11] Load Database... 
+[2020-11-04 - 19:42:11] Read File D:/Documents/GitKraken/asynchronous_messaging/Assets\database.json 
+[2020-11-04 - 19:42:11] Initializing Max Id 
+[2020-11-04 - 19:42:11] Clear Doublons
