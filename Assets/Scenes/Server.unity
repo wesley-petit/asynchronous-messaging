@@ -490,15 +490,14 @@ MonoBehaviour:
     NetworkTransport: {fileID: 1940117181}
     RegisteredScenes:
     - Server
-    - Client
     AllowRuntimeSceneChanges: 0
     NetworkedPrefabs:
     - Prefab: {fileID: 1467226626959735877, guid: 1b7097c41b478754a8223de72ac54a62,
         type: 3}
-      PlayerPrefab: 1
+      PlayerPrefab: 0
     PlayerPrefabHash:
-      Value: 3487921175750451905
-    CreatePlayerPrefab: 1
+      Value: 0
+    CreatePlayerPrefab: 0
     ReceiveTickrate: 64
     MaxReceiveEventsPerTickRate: 500
     EventTickrate: 64
@@ -513,7 +512,7 @@ MonoBehaviour:
     EnsureNetworkedVarLengthSafety: 0
     EnableSceneManagement: 1
     ForceSamePrefabs: 0
-    UsePrefabSync: 0
+    UsePrefabSync: 1
     RecycleNetworkIds: 1
     NetworkIdRecycleDelay: 120
     RpcHashSize: 0

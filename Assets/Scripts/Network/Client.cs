@@ -4,15 +4,15 @@ using MLAPI;
 
 public class Client : NetworkedBehaviour
 {
-	public NetworkedVar<string> HelloWorld =						// Request
+	public NetworkedVar<string> HelloWorld =                        // Request
 		new NetworkedVar<string>(NetworkedSettings.Everyone, "");
-	public NetworkedVar<string> Result =							// Result
+	public NetworkedVar<string> Result =                            // Result
 		new NetworkedVar<string>(NetworkedSettings.Everyone, "");
 
 	// Start means the first function / first connection
 	private void Start()
 	{
-		if (IsLocalPlayer)
+		if (IsOwner)
 		{
 			Debug.Log("---------------------------------------- Local ----------------------------------------");
 		}
@@ -26,9 +26,9 @@ public class Client : NetworkedBehaviour
 	private void Update()
 	{
 		// It will be check in the Start, so we can verify only once
-		if (IsLocalPlayer)
+		if (IsOwner)
 		{
-			UpdateInLocal();
+			UpdateInClient();
 		}
 		else
 		{
@@ -39,7 +39,7 @@ public class Client : NetworkedBehaviour
 	// For this object and in this project, Destroy means a deconnection
 	private void OnDestroy()
 	{
-		if (IsLocalPlayer)
+		if (IsOwner)
 		{
 			Debug.Log("---------------------------------------- Good Bye - Local ----------------------------------------");
 		}
@@ -49,7 +49,7 @@ public class Client : NetworkedBehaviour
 		}
 	}
 
-	private void UpdateInLocal()
+	private void UpdateInClient()
 	{
 		if (Result.Value != "")
 		{

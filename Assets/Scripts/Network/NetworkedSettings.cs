@@ -16,4 +16,25 @@ public static class NetworkedSettings
 		WritePermission = NetworkedVarPermission.ServerOnly,
 		SendTickrate = 0
 	};
+
+	public static NetworkedVarSettings OwnerOnly = new NetworkedVarSettings()
+	{
+		ReadPermission = NetworkedVarPermission.OwnerOnly,
+		WritePermission = NetworkedVarPermission.OwnerOnly,
+		SendTickrate = 0
+	};
+
+	public static NetworkedVarSettings ServerRead = new NetworkedVarSettings()
+	{
+		ReadPermission = NetworkedVarPermission.ServerOnly,
+		WritePermission = NetworkedVarPermission.OwnerOnly,
+		SendTickrate = 0
+	};
+
+	public static NetworkedVarSettings OwnerRead = new NetworkedVarSettings()
+	{
+		ReadPermission = NetworkedVarPermission.OwnerOnly,
+		WritePermission = NetworkedVarPermission.ServerOnly,
+		SendTickrate = 0
+	};
 }
