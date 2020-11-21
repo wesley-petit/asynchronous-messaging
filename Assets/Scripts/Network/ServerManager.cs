@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using MLAPI;
-using MLAPI.Messaging;
-using MLAPI.Serialization.Pooled;
-using System.Text;
 
 public class ServerManager : MonoBehaviour
 {
 	public static ServerManager Instance { get; private set; } = null;
+
+	[SerializeField] private DatabaseController _dbController = new DatabaseController();
 
 	#region Singleton And Register Callbacks
 	private void Awake()
@@ -17,42 +16,34 @@ public class ServerManager : MonoBehaviour
 		}
 		else
 		{
-			Debug.LogError($"There is two Singleton of the same type {typeof(ServerManager)}");
+			Logger.Write($"There is two Singleton of the same type {typeof(ServerManager)}");
 			Destroy(gameObject);
 		}
+
+		LoadDatabase();
+		ClearDoublons();
 	}
 
 	private void Start()
 	{
+		Logger.Write("Start Server...");
 		NetworkingManager.Singleton.StartServer();
 
 		if (!NetworkingManager.Singleton.IsServer)
 		{
+			Logger.Write("Server doesn't start", LogType.ERROR);
 			return;
 		}
 
-		Debug.Log("Start Server");
-
 		NetworkingManager.Singleton.OnClientConnectedCallback += OnClientConnected;
 		NetworkingManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
-
-		//Receiving
-		CustomMessagingManager.RegisterNamedMessageHandler("myMessageName", (senderClientId, stream) =>
-		{
-			using (PooledBitReader reader = PooledBitReader.Get(stream))
-			{
-				StringBuilder stringBuilder = reader.ReadString(); //Example
-				string message = stringBuilder.ToString();
-				Debug.LogError($"Message : {message}");
-			}
-		});
 	}
 	#endregion
 
 	#region Callbacks
 	private void OnClientConnected(ulong clientId)
 	{
-		Debug.Log($"[{clientId}] New Client");
+		Logger.Write($"[{clientId}] New Client");
 
 		// Spawn item 
 		foreach (var item in NetworkingManager.Singleton.NetworkConfig.NetworkedPrefabs)
@@ -81,10 +72,22 @@ public class ServerManager : MonoBehaviour
 
 	private void OnClientDisconnected(ulong clientId)
 	{
-		Debug.Log($"[{clientId}] Client disconnected --- Good Bye!");
+		Logger.Write($"[{clientId}] Client disconnected --- Good Bye!");
 	}
 	#endregion
 
+	#region DatabaseContextMenu
+	[ContextMenu("Save Database")]
+	private void SaveDatabase() => _dbController.SaveDatabase();
+
+	[ContextMenu("Load Database")]
+	private void LoadDatabase() => _dbController.LoadDatabase();
+
+	[ContextMenu("Clear Doublons")]
+	private void ClearDoublons() => _dbController.ClearDoublons();
+	#endregion
+
+	// TODO Remove it
 	// If it's receive Hello, World !, he sends Good Bye
 	public string RequestHelloWorld(string content)
 	{

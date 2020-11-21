@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using MLAPI.NetworkedVar;
 using MLAPI;
-using System.IO;
 using MLAPI.Messaging;
 
 public class Client : NetworkedBehaviour

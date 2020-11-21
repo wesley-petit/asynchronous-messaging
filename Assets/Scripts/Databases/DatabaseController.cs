@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 // Give Access in data
-public class DatabaseController : MonoBehaviour
+[System.Serializable]
+public class DatabaseController
 { 
 	[SerializeField] private Database _database = new Database();
 	[SerializeField] private float _aroundThreshold = 5f;			// Define when a message is near a player
@@ -13,10 +14,11 @@ public class DatabaseController : MonoBehaviour
 	
 	private MessageComparer _comparer = new MessageComparer();      // To verify doublons
 
-	private void Awake()
+	public DatabaseController()
 	{
-		LoadDatabase();
-		ClearDoublons();
+		_database = new Database();
+		_aroundThreshold = 5f;
+		_comparer = new MessageComparer();
 	}
 
 	#region ServerInteract
@@ -60,7 +62,6 @@ public class DatabaseController : MonoBehaviour
 	#endregion
 
 	#region SaveAndLoad
-	[ContextMenu("Save Database")]
 	public void SaveDatabase()
 	{
 		Logger.Write("Save Database...");
@@ -69,7 +70,6 @@ public class DatabaseController : MonoBehaviour
 	}
 
 	// Load Database
-	[ContextMenu("Load Database")]
 	public void LoadDatabase()
 	{
 		Logger.Write("Load Database...");
@@ -83,10 +83,9 @@ public class DatabaseController : MonoBehaviour
 		_database = JsonUtility.FromJson<Database>(jsonData);
 	}
 
-	[ContextMenu("Clear Doublons")]
 	public void ClearDoublons()
 	{
-		Logger.Write("Clear Doublons");
+		Logger.Write("Clear Doublons...");
 
 		//HashSet delete doublons, produce less garbage collector than Linq
 		List<Message> messages = new HashSet<Message>(_database.Messages, _comparer).ToList();
