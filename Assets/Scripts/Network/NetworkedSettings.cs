@@ -1,6 +1,6 @@
 ﻿using MLAPI.NetworkedVar;
 
-// Share permission and tickrate in a ll file
+// Share permission and tickrate in all file
 public static class NetworkedSettings
 {
 	public static NetworkedVarSettings Everyone = new NetworkedVarSettings()

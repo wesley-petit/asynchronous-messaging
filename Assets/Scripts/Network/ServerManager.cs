@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
-using System.IO;
 using MLAPI;
+using MLAPI.Messaging;
+using MLAPI.Serialization.Pooled;
+using System.Text;
 
 public class ServerManager : MonoBehaviour
 {
@@ -33,6 +35,17 @@ public class ServerManager : MonoBehaviour
 
 		NetworkingManager.Singleton.OnClientConnectedCallback += OnClientConnected;
 		NetworkingManager.Singleton.OnClientDisconnectCallback += OnClientDisconnected;
+
+		//Receiving
+		CustomMessagingManager.RegisterNamedMessageHandler("myMessageName", (senderClientId, stream) =>
+		{
+			using (PooledBitReader reader = PooledBitReader.Get(stream))
+			{
+				StringBuilder stringBuilder = reader.ReadString(); //Example
+				string message = stringBuilder.ToString();
+				Debug.LogError($"Message : {message}");
+			}
+		});
 	}
 	#endregion
 
