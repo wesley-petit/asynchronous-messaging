@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [System.Serializable]
 public class Database
 {
-	[SerializeField] private List<Message> messages;
+	[SerializeField] private List<Message> messages = new List<Message>();
 	[SerializeField] private string[] messages_premades = new string[0];
 
 	public List<Message> Messages => messages;

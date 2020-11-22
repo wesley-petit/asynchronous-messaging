@@ -26,7 +26,7 @@ public class Client : NetworkedBehaviour
 	[ServerRPC]
 	public void HelloWorld()
 	{
-		Result.Value = ServerManager.Instance.RequestHelloWorld("Hello, World ! ");
+		//Result.Value = ServerManager.Instance.RequestHelloWorld("Hello, World ! ");
 		Debug.LogError(Result.Value);
 	}
 

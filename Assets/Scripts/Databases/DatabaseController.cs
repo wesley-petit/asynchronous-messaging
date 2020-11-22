@@ -5,13 +5,12 @@ using UnityEngine;
 // Give Access in data
 [System.Serializable]
 public class DatabaseController
-{ 
+{
 	[SerializeField] private Database _database = new Database();
-	[SerializeField] private float _aroundThreshold = 5f;			// Define when a message is near a player
+	[SerializeField] private float _aroundThreshold = 5f;           // Define when a message is near a player
 
-	// Wraper
-	public string[] GetMessagesPremades => _database.MessagesPremades;
-	
+	public string[] GetMessagesPremades => _database.MessagesPremades;  // Wraper
+
 	private MessageComparer _comparer = new MessageComparer();      // To verify doublons
 
 	public DatabaseController()
@@ -22,15 +21,17 @@ public class DatabaseController
 	}
 
 	#region ServerInteract
-	public Message[] GetMessagesByPlayerPosition(Vector3 playerPosition)
+	public Messages GetMessagesByPlayerPosition(Vector3 playerPosition)
 	{
 		/// HashSet - Doesn't allow doublons and it's more efficient to add an item (like a List)
 		/// Linq - Take all position in a certain area around the player
 		/// ToArray - HashSet can't be serialize in editor or in a file
-		return new HashSet<Message>(_database.Messages
-								.Where(k => Vector3.Distance(k.GetPositionMessage, playerPosition) < _aroundThreshold),
-								_comparer)
-								.ToArray();
+		Messages messages = new Messages(new HashSet<Message>(_database.Messages
+			.Where(k => Vector3.Distance(k.GetPositionMessage, playerPosition) < _aroundThreshold),
+			_comparer)
+			.ToArray());
+
+		return messages;
 	}
 
 	public void Insert(Message message)
@@ -65,6 +66,7 @@ public class DatabaseController
 	public void SaveDatabase()
 	{
 		Logger.Write("Save Database...");
+
 		string jsonData = JsonUtility.ToJson(_database, true);
 		FileManagement.Write(FileNameConst.DATABASE, jsonData);
 	}

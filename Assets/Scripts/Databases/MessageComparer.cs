@@ -5,8 +5,12 @@ public class MessageComparer : IEqualityComparer<Message>
 {
 	public bool Equals(Message b1, Message b2)
 	{
-		if (b2.ContainsNullValues && b1.ContainsNullValues)
+		if (b1.ContainsNullValues && b2.ContainsNullValues)
 			return true;
+		else if (b1.IsEmpty && b2.IsEmpty)
+			return true;
+		else if (b1.IsEmpty || b2.IsEmpty)
+			return false;
 		else if (b1.ContainsNullValues || b2.ContainsNullValues)
 			return false;
 		else return b1.GetUserName == b2.GetUserName

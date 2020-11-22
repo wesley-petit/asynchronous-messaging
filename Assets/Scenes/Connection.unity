@@ -386,6 +386,79 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1596217758
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1596217760}
+  - component: {fileID: 1596217759}
+  - component: {fileID: 1596217761}
+  - component: {fileID: 1596217762}
+  m_Layer: 0
+  m_Name: TestClientDatas
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1596217759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596217758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1eabeb2d5cfe534a98c2a1b17028c94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1596217760
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596217758}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1596217761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596217758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ca30d3a135c8b40b8c6b753767a1a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clientRequests: {fileID: 1596217759}
+  _timerMax: 5
+  _playerPosition: {x: 5, y: 5, z: 5}
+--- !u!114 &1596217762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1596217758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2194df60cb7e1c4bb71f71d16ddcd7b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _clientRequests: {fileID: 1596217759}
 --- !u!1 &1866295848
 GameObject:
   m_ObjectHideFlags: 0
@@ -415,7 +488,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91831da5ce6e7544d837dee5ead71def, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _clientId: 10
+  _dbController:
+    _database:
+      messages:
+      - User_Name: NullReferenceException
+        Message_Content: Hello World !
+        Message_Time: 2020-11-13
+        Position_Message: {x: 5, y: 5, z: 5}
+      messages_premades:
+      - Nice day for fishing, ain't it?
+    _aroundThreshold: 5
 --- !u!4 &1866295850
 Transform:
   m_ObjectHideFlags: 0
