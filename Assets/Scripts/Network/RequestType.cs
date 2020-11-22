@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+// TODO Remove it
+[System.Serializable]
 public enum RequestType
 {
 	SCAN_MESSAGES,
@@ -7,11 +9,13 @@ public enum RequestType
 }
 
 // Struct use in the queue request
+// TODO Remove it
+[System.Serializable]
 public struct ClientRequest
 {
-	public RequestType RequestType { get; private set; }
-	public string Datas { get; private set; }
-	public ClientRequests ClientDatas { get; private set; }            // Store the result of a request
+	[SerializeField] public RequestType RequestType { get; private set; }
+	[SerializeField] public string Datas { get; private set; }
+	[SerializeField] public ClientRequests ClientDatas { get; private set; }            // Store the result of a request
 
 	public bool IsNull => !ClientDatas;
 	public bool IsEmpty => Datas == "";
