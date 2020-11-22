@@ -35,9 +35,17 @@ public class ClientOutHandler : MonoBehaviour
 			if (!_clientRequests)
 				return;
 
-			foreach (var response in _clientRequests.RequestIn)
+			if (0 < _clientRequests.RequestIn.Count)
 			{
-				ReadResponse(response);
+				// FIFO and verify index
+				int i = 0;
+				do
+				{
+					ClientRequest response = _clientRequests.RequestIn[i];
+					ReadResponse(response);
+					_clientRequests.RequestIn.RemoveAt(i);
+				}
+				while (0 < _clientRequests.RequestIn.Count);
 			}
 
 			UpdateDatas();
@@ -65,7 +73,7 @@ public class ClientOutHandler : MonoBehaviour
 				Logger.Write($"[{_clientRequests.ClientId}] Unknow request {requestType}", LogType.WARNING);
 				break;
 		}
-		
+
 		_clientRequests.AddRequest(new ClientRequest(requestType, datas));
 	}
 
@@ -73,15 +81,18 @@ public class ClientOutHandler : MonoBehaviour
 	{
 		// TODO Remove it
 		response.ShowContent();
-		Logger.Write($"[{_clientRequests.ClientId}] Response from Server of {response.RequestType}");
+		RequestType requestType = response.RequestType;
+		string datas = response.Datas;
 
-		switch (response.RequestType)
+		Logger.Write($"[{_clientRequests.ClientId}] Response from Server of {requestType}");
+
+		switch (requestType)
 		{
 			case RequestType.SCAN_MESSAGES:
 				try
 				{
 					// Input
-					Messages messages = JsonUtility.FromJson<Messages>(response.Datas);
+					Messages messages = JsonUtility.FromJson<Messages>(datas);
 
 					// Give last value
 					// TODO Remove it
@@ -101,12 +112,12 @@ public class ClientOutHandler : MonoBehaviour
 				break;
 
 			default:
-				Logger.Write($"Unknow response {response.RequestType}", LogType.WARNING);
+				Logger.Write($"Unknow response {requestType}", LogType.WARNING);
 				break;
 		}
 	}
 	#endregion
-	
+
 	private void UpdateDatas()
 	{
 		_clientRequests.UpdateDatas();

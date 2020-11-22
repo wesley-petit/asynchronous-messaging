@@ -1,18 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
 using MLAPI;
 using MLAPI.Messaging;
+using MLAPI.NetworkedVar.Collections;
 
 // Store only client requests and his getters / setters
 public class ClientRequests : NetworkedBehaviour
 {
 	#region Public Fields
 	public bool IsOwnedByTheClient => IsOwner;
-	public ulong ClientId => 9000; // OwnerClientId;
-	public Queue<ClientRequest> RequestOut { get; private set; }            // Client to server
-		= new Queue<ClientRequest>();
-	public Queue<ClientRequest> RequestIn { get; private set; }            // Server to client
-		= new Queue<ClientRequest>();
+	public ulong ClientId => OwnerClientId;
+	public NetworkedList<ClientRequest> RequestOut { get; private set; } // Client to server
+		= new NetworkedList<ClientRequest>(NetworkedSettings.Everyone, new NetworkedList<ClientRequest>());
+	public NetworkedList<ClientRequest> RequestIn { get; private set; }  // Server to client
+		= new NetworkedList<ClientRequest>(NetworkedSettings.Everyone, new NetworkedList<ClientRequest>());
 	#endregion
 
 	public Action OnUpdateData = null;
@@ -27,7 +27,7 @@ public class ClientRequests : NetworkedBehaviour
 			return;
 		}
 
-		RequestOut.Enqueue(new ClientRequest(clientRequest, this));
+		RequestOut.Add(new ClientRequest(clientRequest, this));
 	}
 
 	// Add and verify a response
@@ -39,7 +39,7 @@ public class ClientRequests : NetworkedBehaviour
 			return;
 		}
 
-		RequestIn.Enqueue(serverResponse);
+		RequestIn.Add(serverResponse);
 	}
 	#endregion
 

@@ -105,7 +105,7 @@ public class ServerManager : MonoBehaviour
 				break;
 
 			default:
-				Logger.Write($"Unknow request {requestType} from [{clientRequest.ClientDatas.ClientId}]", LogType.WARNING);
+				Logger.Write($"Unknow request {requestType} from [{clientDatas.ClientId}]", LogType.WARNING);
 				break;
 		}
 

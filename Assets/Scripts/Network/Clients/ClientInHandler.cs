@@ -37,14 +37,23 @@ public class ClientInHandler : MonoBehaviour
 		// TODO Keep it
 		//if (_clientDatas.IsOwnerByTheClient)
 		//{
+		if (_clientRequests.RequestOut.Count <= 0)
+			return;
+
 		Logger.Write($"[{_clientRequests.ClientId}] Send Requests");
+
 		if (!_clientRequests)
 			return;
 
-		foreach (var clientRequest in _clientRequests.RequestOut)
+		// FIFO and verify index before and after
+		int i = 0;
+		do
 		{
+			ClientRequest clientRequest = _clientRequests.RequestOut[i];
 			ServerManager.Instance.AddRequest(clientRequest);
+			_clientRequests.RequestOut.RemoveAt(i);
 		}
+		while (0 < _clientRequests.RequestOut.Count);
 		//}
 	}
 }
