@@ -1,11 +1,10 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 // Add request in client requests with the correct datas
 // Take the server response and give it to other instance
 public class ClientOutHandler : MonoBehaviour
 {
-	[SerializeField] private ClientRequests _clientRequests = null;
+	[SerializeField] private Client _client = null;
 	[SerializeField] private float _timerMax = 10f;                 // Time limits where we send request
 	[SerializeField] private Vector3 _playerPosition = Vector3.zero;
 
@@ -14,14 +13,11 @@ public class ClientOutHandler : MonoBehaviour
 	#region Unity Methods
 	private void Start()
 	{
-		if (!_clientRequests)
+		if (!_client)
 		{
-			Logger.Write("Client Requests is undefined", LogType.ERROR);
+			Logger.Write("Client is undefined", LogType.ERROR);
 			return;
 		}
-
-		// TODO Remove it
-		AddTypeRequest(RequestType.SCAN_MESSAGES);
 	}
 
 	private void Update()
@@ -32,23 +28,15 @@ public class ClientOutHandler : MonoBehaviour
 		{
 			_timer = 0f;
 
-			if (!_clientRequests)
+			if (!_client)
 				return;
 
-			if (0 < _clientRequests.RequestIn.Count)
-			{
-				// FIFO and verify index
-				int i = 0;
-				do
-				{
-					ClientRequest response = _clientRequests.RequestIn[i];
-					ReadResponse(response);
-					_clientRequests.RequestIn.RemoveAt(i);
-				}
-				while (0 < _clientRequests.RequestIn.Count);
-			}
+			foreach (var response in _client.Response)
+				ReadResponse(response);
 
-			UpdateDatas();
+			_client.Response.Clear();
+
+			_client.InvokeServerRpc(_client.SendRequest);
 		}
 	}
 	#endregion
@@ -57,10 +45,10 @@ public class ClientOutHandler : MonoBehaviour
 	// With a specefic type, it will add the correct value in the client request
 	public void AddTypeRequest(RequestType requestType)
 	{
-		if (!_clientRequests)
+		if (!_client)
 			return;
 
-		Logger.Write($"[{_clientRequests.ClientId}] Add Type Request {requestType}");
+		Logger.Write($"[{_client.OwnerClientId}] Add Type Request {requestType}");
 		string datas = "";
 
 		switch (requestType)
@@ -70,21 +58,19 @@ public class ClientOutHandler : MonoBehaviour
 				break;
 
 			default:
-				Logger.Write($"[{_clientRequests.ClientId}] Unknow request {requestType}", LogType.WARNING);
+				Logger.Write($"[{_client.OwnerClientId}] Unknow request {requestType}", LogType.WARNING);
 				break;
 		}
 
-		_clientRequests.AddRequest(new ClientRequest(requestType, datas));
+		_client.AddRequest(new Request(requestType, datas));
 	}
 
-	private void ReadResponse(ClientRequest response)
+	private void ReadResponse(Request response)
 	{
-		// TODO Remove it
-		response.ShowContent();
 		RequestType requestType = response.RequestType;
 		string datas = response.Datas;
 
-		Logger.Write($"[{_clientRequests.ClientId}] Response from Server of {requestType}");
+		Logger.Write($"[{_client.OwnerClientId}] Response from Server of {requestType}");
 
 		switch (requestType)
 		{
@@ -95,13 +81,8 @@ public class ClientOutHandler : MonoBehaviour
 					Messages messages = JsonUtility.FromJson<Messages>(datas);
 
 					// Give last value
-					// TODO Remove it
-					//foreach (var message in messages.MessageArray)
-					//{
-					//	message.ShowContent();
-					//}
 				}
-				catch (Exception e)
+				catch (System.Exception e)
 				{
 					Logger.Write(e.ToString(), LogType.ERROR);
 					return;
@@ -117,10 +98,4 @@ public class ClientOutHandler : MonoBehaviour
 		}
 	}
 	#endregion
-
-	private void UpdateDatas()
-	{
-		_clientRequests.UpdateDatas();
-		//_clientDatas.InvokeServerRpc(_clientDatas.UpdateData);
-	}
 }

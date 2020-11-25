@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using MLAPI;
-using System;
 
 public class ServerManager : MonoBehaviour
 {
+	[SerializeField] private DatabaseController _dbController = new DatabaseController();
+
 	public static ServerManager Instance { get; private set; } = null;
 
-	[SerializeField] private DatabaseController _dbController = new DatabaseController();
-	[SerializeField] private Queue<ClientRequest> _requests = new Queue<ClientRequest>();
-
 	private NetworkingManager NetworkManager => NetworkingManager.Singleton;
+
+	private Queue<Request> _requests = new Queue<Request>();
 
 	#region Unity Methods
 	// Singleton
@@ -61,7 +61,7 @@ public class ServerManager : MonoBehaviour
 
 	#region Request
 	// Add and verify a request
-	public void AddRequest(ClientRequest clientRequest)
+	public void AddRequest(Request clientRequest)
 	{
 		if (clientRequest.IsNull)
 		{
@@ -71,19 +71,19 @@ public class ServerManager : MonoBehaviour
 
 		if (clientRequest.IsEmpty)
 		{
-			Logger.Write($"[{clientRequest.ClientDatas.ClientId}] Empty request {clientRequest.RequestType}", LogType.WARNING);
+			Logger.Write($"[{clientRequest.Client.OwnerClientId}] Empty request {clientRequest.RequestType}", LogType.WARNING);
 			return;
 		}
 
 		_requests.Enqueue(clientRequest);
 	}
 
-	private void ApplyRequest(ClientRequest clientRequest)
+	private void ApplyRequest(Request clientRequest)
 	{
 		string response = "";
 		RequestType requestType = clientRequest.RequestType;
 		string datas = clientRequest.Datas;
-		ClientRequests clientDatas = clientRequest.ClientDatas;
+		Client client = clientRequest.Client;
 
 		switch (requestType)
 		{
@@ -97,7 +97,7 @@ public class ServerManager : MonoBehaviour
 					Messages messages = _dbController.GetMessagesByPlayerPosition(position);
 					response = JsonUtility.ToJson(messages);
 				}
-				catch (Exception e)
+				catch (System.Exception e)
 				{
 					Logger.Write(e.ToString(), LogType.ERROR);
 					return;
@@ -105,12 +105,12 @@ public class ServerManager : MonoBehaviour
 				break;
 
 			default:
-				Logger.Write($"Unknow request {requestType} from [{clientDatas.ClientId}]", LogType.WARNING);
+				Logger.Write($"Unknow request {requestType} from [{client.OwnerClientId}]", LogType.WARNING);
 				break;
 		}
 
 		// Output
-		clientDatas.AddResponse(new ClientRequest(requestType, response));
+		client.InvokeClientRpcOnOwner(client.AddResponse, new Request(requestType, response));
 	}
 	#endregion
 
@@ -120,10 +120,8 @@ public class ServerManager : MonoBehaviour
 		Logger.Write($"[{clientId}] New Client");
 
 		// Spawn item 
-		foreach (var item in NetworkingManager.Singleton.NetworkConfig.NetworkedPrefabs)
-		{
+		foreach (var item in NetworkManager.NetworkConfig.NetworkedPrefabs)
 			SpawnAndHide(clientId, item);
-		}
 	}
 
 	private void OnClientDisconnected(ulong clientId)
@@ -149,7 +147,7 @@ public class ServerManager : MonoBehaviour
 	private void HideToOtherClients(NetworkedObject networkedObject)
 	{
 		// Hide object in all clients, except the owner
-		foreach (var client in NetworkingManager.Singleton.ConnectedClientsList)
+		foreach (var client in NetworkManager.ConnectedClientsList)
 		{
 			if (client.ClientId == networkedObject.OwnerClientId) { continue; }
 

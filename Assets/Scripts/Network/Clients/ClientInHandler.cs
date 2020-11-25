@@ -4,56 +4,48 @@
 // reference in a client side
 public class ClientInHandler : MonoBehaviour
 {
-	[SerializeField] private ClientRequests _clientRequests = null;
+	[SerializeField] private Client _client = null;
 
 	#region Unity Methods
 	private void Start()
 	{
-		if (!_clientRequests)
+		if (!_client)
 		{
-			Logger.Write($"Client Requests is undefined in {name}", LogType.ERROR);
+			Logger.Write($"Client is undefined in {name}", LogType.ERROR);
 			return;
 		}
 	}
 
 	private void OnEnable()
 	{
-		if (_clientRequests)
+		if (_client)
 		{
-			_clientRequests.OnUpdateData += SendRequests;
+			_client.OnSendRequest += SendRequests;
 		}
 	}
+
 	private void OnDisable()
 	{
-		if (_clientRequests)
+		if (_client)
 		{
-			_clientRequests.OnUpdateData -= SendRequests;
+			_client.OnSendRequest -= SendRequests;
 		}
 	}
 	#endregion
 
 	private void SendRequests()
 	{
-		// TODO Keep it
-		//if (_clientDatas.IsOwnerByTheClient)
-		//{
-		if (_clientRequests.RequestOut.Count <= 0)
+		if (_client.Request.Count <= 0)
 			return;
 
-		Logger.Write($"[{_clientRequests.ClientId}] Send Requests");
+		Logger.Write($"[{_client.OwnerClientId}] Send Requests");
 
-		if (!_clientRequests)
+		if (!_client)
 			return;
 
-		// FIFO and verify index before and after
-		int i = 0;
-		do
-		{
-			ClientRequest clientRequest = _clientRequests.RequestOut[i];
-			ServerManager.Instance.AddRequest(clientRequest);
-			_clientRequests.RequestOut.RemoveAt(i);
-		}
-		while (0 < _clientRequests.RequestOut.Count);
-		//}
+		foreach (var clientRequest in _client.Request)
+			ServerManager.Instance.AddRequest(new Request(clientRequest, _client));
+
+		_client.Request.Clear();
 	}
 }
