@@ -7,16 +7,16 @@ using UnityEngine;
 public class DatabaseController
 {
 	[SerializeField] private Database _database = new Database();
-	[SerializeField] private float _aroundThreshold = 5f;           // Define when a message is near a player
+	[SerializeField] private float _aroundThreshold = 100f;				// Define when a message is near a player
 
 	public string[] GetMessagesPremades => _database.MessagesPremades;  // Wraper
 
-	private MessageComparer _comparer = new MessageComparer();      // To verify doublons
+	private MessageComparer _comparer = new MessageComparer();			// To verify doublons
 
 	public DatabaseController()
 	{
 		_database = new Database();
-		_aroundThreshold = 5f;
+		_aroundThreshold = 100f;
 		_comparer = new MessageComparer();
 	}
 

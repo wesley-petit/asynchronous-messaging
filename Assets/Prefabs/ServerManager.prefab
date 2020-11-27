@@ -47,4 +47,4 @@ MonoBehaviour:
     _database:
       messages: []
       messages_premades: []
-    _aroundThreshold: 5
+    _aroundThreshold: 100

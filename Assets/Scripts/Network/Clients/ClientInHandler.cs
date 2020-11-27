@@ -16,19 +16,14 @@ public class ClientInHandler : MonoBehaviour
 		}
 	}
 
-	private void OnEnable()
+	private void Update()
 	{
-		if (_client)
-		{
-			_client.OnSendRequest += SendRequests;
-		}
-	}
+		if (!_client)
+			return;
 
-	private void OnDisable()
-	{
-		if (_client)
+		if (0 < _client.Request.Count)
 		{
-			_client.OnSendRequest -= SendRequests;
+			SendRequests();
 		}
 	}
 	#endregion

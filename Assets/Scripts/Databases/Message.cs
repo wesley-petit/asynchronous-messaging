@@ -3,20 +3,6 @@
 // Each name (attribute and type) must be the same as the JSON
 /* ==================================================== Tuple Element ======================================================== */
 [System.Serializable]
-public class Messages
-{
-	[SerializeField] private Message[] messages = new Message[0];
-
-	public Message[] MessageArray => messages;
-
-	public Messages(Message[] messages)
-	{
-		this.messages = messages;
-	}
-}
-
-
-[System.Serializable]
 public class Message
 {
 	[SerializeField] private string User_Name = "";

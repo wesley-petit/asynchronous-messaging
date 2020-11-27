@@ -13,17 +13,12 @@ public class Client : NetworkedBehaviour
 		= new List<Request>();
 	#endregion
 
-	public System.Action OnSendRequest = null;
-
 	#region Request And Response
 	// Add and verify a request
 	public void AddRequest(Request clientRequest)
 	{
 		if (clientRequest.IsEmpty)
-		{
-			Logger.Write($"[{OwnerClientId}] Empty request {clientRequest.RequestType}", LogType.WARNING);
 			return;
-		}
 
 		Request.Add(clientRequest);
 	}
@@ -33,15 +28,9 @@ public class Client : NetworkedBehaviour
 	public void AddResponse(Request serverResponse)
 	{
 		if (serverResponse.IsEmpty)
-		{
-			Logger.Write($"Empty request {serverResponse.RequestType} from Server", LogType.WARNING);
 			return;
-		}
 
 		Response.Add(serverResponse);
 	}
 	#endregion
-
-	[ServerRPC(RequireOwnership = true)]
-	public void SendRequest() => OnSendRequest?.Invoke();
 }

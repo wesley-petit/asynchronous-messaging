@@ -88,20 +88,31 @@ public class ServerManager : MonoBehaviour
 		switch (requestType)
 		{
 			case RequestType.SCAN_MESSAGES:
-				try
-				{
-					// Input
-					Vector3 position = JsonUtility.FromJson<Vector3>(datas);
+				// Input
+				Vector3 position = JsonUtility.FromJson<Vector3>(datas);
 
-					// Calculate
-					Messages messages = _dbController.GetMessagesByPlayerPosition(position);
-					response = JsonUtility.ToJson(messages);
-				}
-				catch (System.Exception e)
-				{
-					Logger.Write(e.ToString(), LogType.ERROR);
-					return;
-				}
+				// Calculate
+				Messages messages = _dbController.GetMessagesByPlayerPosition(position);
+				response = JsonUtility.ToJson(messages);
+				break;
+
+			case RequestType.ADD_MESSAGE:
+				// Input
+				Message addMessage = JsonUtility.FromJson<Message>(datas);
+
+				_dbController.Insert(addMessage);
+				break;
+
+			case RequestType.MESSAGE_PREMADE:
+				MessagesPremades messagePremades = new MessagesPremades(_dbController.GetMessagesPremades);
+				response = JsonUtility.ToJson(messagePremades);
+				break;
+
+			case RequestType.PING:
+				// Ping calculate in the client
+				Ping ping = JsonUtility.FromJson<Ping>(datas);
+				ping.CalcultatePing();
+				response = datas;
 				break;
 
 			default:

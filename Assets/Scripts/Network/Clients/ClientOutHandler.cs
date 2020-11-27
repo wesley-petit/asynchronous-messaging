@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 
 // Add request in client requests with the correct datas
-// Take the server response and give it to other instance
+// Read server response and give it to other instance
 public class ClientOutHandler : MonoBehaviour
 {
 	[SerializeField] private Client _client = null;
-	[SerializeField] private float _timerMax = 10f;                 // Time limits where we send request
-	[SerializeField] private Vector3 _playerPosition = Vector3.zero;
 
-	private float _timer = 0f;
+	// Value
+	[SerializeField] private Vector3 _playerPosition = Vector3.zero;
+	[SerializeField] private Message[] _messages = new Message[0];
+	[SerializeField] private string[] _messagesPremades = new string[0];
+	[SerializeField] private Ping _ping = new Ping();
 
 	#region Unity Methods
 	private void Start()
@@ -18,49 +20,40 @@ public class ClientOutHandler : MonoBehaviour
 			Logger.Write("Client is undefined", LogType.ERROR);
 			return;
 		}
+
+		AddRequest(RequestType.MESSAGE_PREMADE, "Fill blank to avoid the empty verification");
+
+		// TODO Remove it
+		//AddRequest(RequestType.SCAN_MESSAGES, _playerPosition);
+		//AddRequest(RequestType.ADD_MESSAGE, new Message("RaskasseVolante", "Add Message", System.DateTime.Now.ToString(), new Vector3(5f, 5f)));
+		//AddRequest(RequestType.PING, new Ping());
 	}
 
 	private void Update()
 	{
-		_timer += Time.deltaTime;
+		if (!_client)
+			return;
 
-		if (_timerMax < _timer)
+		if (0 < _client.Response.Count)
 		{
-			_timer = 0f;
-
-			if (!_client)
-				return;
-
 			foreach (var response in _client.Response)
 				ReadResponse(response);
 
 			_client.Response.Clear();
-
-			_client.InvokeServerRpc(_client.SendRequest);
 		}
 	}
 	#endregion
 
 	#region Request And Response
-	// With a specefic type, it will add the correct value in the client request
-	public void AddTypeRequest(RequestType requestType)
+
+	// Generic add request
+	public void AddRequest<T>(RequestType requestType, T requestDatas)
 	{
 		if (!_client)
 			return;
 
-		Logger.Write($"[{_client.OwnerClientId}] Add Type Request {requestType}");
-		string datas = "";
-
-		switch (requestType)
-		{
-			case RequestType.SCAN_MESSAGES:
-				datas = JsonUtility.ToJson(_playerPosition);
-				break;
-
-			default:
-				Logger.Write($"[{_client.OwnerClientId}] Unknow request {requestType}", LogType.WARNING);
-				break;
-		}
+		Logger.Write($"[{_client.OwnerClientId}] Add Request {requestType}");
+		string datas = JsonUtility.ToJson(requestDatas);
 
 		_client.AddRequest(new Request(requestType, datas));
 	}
@@ -75,21 +68,21 @@ public class ClientOutHandler : MonoBehaviour
 		switch (requestType)
 		{
 			case RequestType.SCAN_MESSAGES:
-				try
-				{
-					// Input
-					Messages messages = JsonUtility.FromJson<Messages>(datas);
-
-					// Give last value
-				}
-				catch (System.Exception e)
-				{
-					Logger.Write(e.ToString(), LogType.ERROR);
-					return;
-				}
+				// Input
+				Messages messages = JsonUtility.FromJson<Messages>(datas);
+				_messages = messages.GetMessages;
 				break;
 
-			case RequestType.ADD_MESSAGE:
+			case RequestType.MESSAGE_PREMADE:
+				// Input
+				MessagesPremades messagesPremades = JsonUtility.FromJson<MessagesPremades>(datas);
+				_messagesPremades = messagesPremades.GetMessagesPremades;
+				break;
+
+			case RequestType.PING:
+				// Input
+				_ping = JsonUtility.FromJson<Ping>(datas);
+				_ping.CalcultatePing();
 				break;
 
 			default:
