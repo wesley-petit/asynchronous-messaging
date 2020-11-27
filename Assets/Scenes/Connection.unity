@@ -486,6 +486,75 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b72252f2f67fd4d4193b77b04c186022, type: 3}
+--- !u!1001 &1822339758223647008
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1822339756940423274, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_Name
+      value: Metrics
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1822339756940423276, guid: aadc66555cac84b4d9318d58865ca3b3,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: aadc66555cac84b4d9318d58865ca3b3, type: 3}
 --- !u!1001 &4425774482289914169
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -591,31 +660,6 @@ PrefabInstance:
     - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
         type: 3}
       propertyPath: _dbController._database.messages.Array.data[0].Position_Message.z
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
-        type: 3}
-      propertyPath: _dbController._database.messages.Array.data[1].User_Name
-      value: RaskasseVolante
-      objectReference: {fileID: 0}
-    - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
-        type: 3}
-      propertyPath: _dbController._database.messages.Array.data[1].Message_Content
-      value: Add Message
-      objectReference: {fileID: 0}
-    - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
-        type: 3}
-      propertyPath: _dbController._database.messages.Array.data[1].Message_Time
-      value: 2020-11-27 - 17:39:46
-      objectReference: {fileID: 0}
-    - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
-        type: 3}
-      propertyPath: _dbController._database.messages.Array.data[1].Position_Message.x
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
-        type: 3}
-      propertyPath: _dbController._database.messages.Array.data[1].Position_Message.y
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,

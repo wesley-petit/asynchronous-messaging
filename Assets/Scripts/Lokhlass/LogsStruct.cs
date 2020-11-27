@@ -2,7 +2,7 @@
 
 // It's much easier to read an error or a warning message
 // I know, there is UnityEngine.LogType
-public enum LogType { NORMAL, WARNING, ERROR }
+public enum LogType { NORMAL, WARNING, ERROR, METRICS }
 
 // Use in the log window
 public struct Log

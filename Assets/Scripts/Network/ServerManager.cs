@@ -7,6 +7,7 @@ public class ServerManager : MonoBehaviour
 	[SerializeField] private DatabaseController _dbController = new DatabaseController();
 
 	public static ServerManager Instance { get; private set; } = null;
+	public int ConnectedClientsNumber => NetworkManager.ConnectedClientsList.Count;
 
 	private NetworkingManager NetworkManager => NetworkingManager.Singleton;
 
@@ -171,8 +172,8 @@ public class ServerManager : MonoBehaviour
 	#endregion
 
 	#region DatabaseContextMenu
-	[ContextMenu("Save Database")] private void SaveDatabase() => _dbController.SaveDatabase();
-	[ContextMenu("Load Database")] private void LoadDatabase() => _dbController.LoadDatabase();
-	[ContextMenu("Clear Doublons")] private void ClearDoublons() => _dbController.ClearDoublons();
+	[ContextMenu("Save Database")] public void SaveDatabase() => _dbController.SaveDatabase();
+	[ContextMenu("Load Database")] public void LoadDatabase() => _dbController.LoadDatabase();
+	[ContextMenu("Clear Doublons")] public void ClearDoublons() => _dbController.ClearDoublons();
 	#endregion
 }

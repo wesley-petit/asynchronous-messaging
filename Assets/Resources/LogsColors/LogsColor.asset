@@ -26,4 +26,8 @@ MonoBehaviour:
     _colors:
     - {r: 0.8867924, g: 0.31647572, b: 0.2300641, a: 1}
     _textColor: {r: 0, g: 0, b: 0, a: 1}
+  - _type: 3
+    _colors:
+    - {r: 0.23137252, g: 0.54983073, b: 0.8862745, a: 1}
+    _textColor: {r: 0, g: 0, b: 0, a: 1}
   _notFoundColor: {r: 0, g: 0, b: 0, a: 1}
