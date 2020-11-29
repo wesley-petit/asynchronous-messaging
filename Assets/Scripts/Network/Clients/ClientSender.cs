@@ -2,7 +2,7 @@
 
 // Send request to the server to avoid a server 
 // reference in a client side
-public class ClientInHandler : MonoBehaviour
+public class ClientSender : MonoBehaviour
 {
 	[SerializeField] private Client _client = null;
 
@@ -23,24 +23,15 @@ public class ClientInHandler : MonoBehaviour
 
 		if (0 < _client.Request.Count)
 		{
-			SendRequests();
+			Logger.Write($"[{_client.OwnerClientId}] Send Requests");
+
+			foreach (var clientRequest in _client.Request)
+				SendRequest(clientRequest);
+
+			_client.Request.Clear();
 		}
 	}
 	#endregion
 
-	private void SendRequests()
-	{
-		if (_client.Request.Count <= 0)
-			return;
-
-		Logger.Write($"[{_client.OwnerClientId}] Send Requests");
-
-		if (!_client)
-			return;
-
-		foreach (var clientRequest in _client.Request)
-			ServerManager.Instance.AddRequest(new Request(clientRequest, _client));
-
-		_client.Request.Clear();
-	}
+	private void SendRequest(Request clientRequest) => ServerManager.Instance.AddRequest(new Request(clientRequest, _client));
 }

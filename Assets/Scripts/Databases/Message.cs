@@ -17,6 +17,7 @@ public class Message
 	public Vector3 GetPositionMessage => Position_Message;
 	#endregion
 
+	// string.IsNullOrEmpty will do the work in a real production
 	public bool ContainsNullValues => User_Name == null || Message_Content == null || Message_Time == null;
 	public bool IsEmpty => User_Name == "" || Message_Content == "" || Message_Time == "";
 

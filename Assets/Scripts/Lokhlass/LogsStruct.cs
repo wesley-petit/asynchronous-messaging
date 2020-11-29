@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 
 // It's much easier to read an error or a warning message
-// I know, there is UnityEngine.LogType
+// I know, there is UnityEngine.LogType, so what ? Has it a Metrics type ? NO
 public enum LogType { NORMAL, WARNING, ERROR, METRICS }
 
 // Use in the log window

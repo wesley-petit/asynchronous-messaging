@@ -1,6 +1,9 @@
 ﻿// Datas send in a request / Paste in a JSON
 // Each Save and Load value must be marked as a SerializeField
 /* ==================================================== Request Datas ======================================================== */
+
+// Class contains only arrays to serialize an specefic array and not the original array
+#region Array Class
 [System.Serializable]
 public class Messages
 {
@@ -36,6 +39,7 @@ public class MessagesPremades
 		this.messagesPremades = messagesPremades;
 	}
 }
+#endregion
 
 [System.Serializable]
 public class Ping

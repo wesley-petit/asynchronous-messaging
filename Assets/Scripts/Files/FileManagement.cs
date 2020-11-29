@@ -5,6 +5,7 @@ using System;
 // Read and Write
 public static class FileManagement
 {
+	#region Read
 	public static string Read(string fileName)
 	{
 		try
@@ -14,8 +15,8 @@ public static class FileManagement
 
 			if (!File.Exists(path))
 			{
-				Logger.Write($"File not found at {path}", LogType.ERROR);
-				return "";
+				File.Create(path);
+				Logger.Write($"File not found at {path}", LogType.WARNING);
 			}
 
 			return File.ReadAllText(path);
@@ -26,7 +27,7 @@ public static class FileManagement
 			return "";
 		}
 	}
-	
+
 	public static string[] ReadAllLines(string fileName)
 	{
 		try
@@ -34,8 +35,8 @@ public static class FileManagement
 			string path = GetFilePath(fileName);
 			if (!File.Exists(path))
 			{
-				Debug.LogError($"File not found at {path}");
-				return new string[0];
+				File.Create(path);
+				Debug.LogWarning($"File not found at {path}, so we create it");
 			}
 
 			return File.ReadAllLines(path);
@@ -46,7 +47,9 @@ public static class FileManagement
 			return new string[0];
 		}
 	}
+	#endregion
 
+	#region Write
 	public static void Write(string fileName, string content)
 	{
 		try
@@ -86,6 +89,15 @@ public static class FileManagement
 			Debug.LogError(e.ToString());
 		}
 	}
+	#endregion
 
-	private static string GetFilePath(string fileName) => Path.Combine(Application.dataPath, fileName);
+	// File Path in production or in release
+	private static string GetFilePath(string fileName)
+	{
+#if UNITY_EDITOR
+		return Path.Combine(Application.dataPath, fileName);
+#else
+		return Path.Combine(Application.persistentDataPath, fileName);
+#endif
+	}
 }

@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-// Give Access in data
+// Give Access / Interface in data
+// Maage Save, Load and Clear Doublons
 [System.Serializable]
 public class DatabaseController
 {
@@ -47,7 +48,7 @@ public class DatabaseController
 
 		if (message.ContainsNullValues || message.IsEmpty)
 		{
-			Logger.Write($"Can't add a Message which contains null values", LogType.ERROR);
+			Logger.Write($"Can't add a Message which contains null or empty values", LogType.ERROR);
 			return;
 		}
 

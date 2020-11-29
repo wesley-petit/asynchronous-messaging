@@ -1,19 +1,18 @@
-﻿using MLAPI.Serialization;
-using MLAPI.Serialization.Pooled;
-using System.IO;
+﻿using MLAPI.Serialization.Pooled;
 
 // Struct use in the queue request
-public class Request : IBitWritable
+// Interface to transfer data with MLAPI
+public class Request : MLAPI.Serialization.IBitWritable
 {
 	public RequestType RequestType { get; private set; }
 	public string Datas { get; private set; }
-	public Client Client { get; private set; } // Store the result of a request
+	public Client Client { get; private set; }          // Reference of a sender
 
 	public bool IsNull => !Client;
-	public bool IsEmpty => Datas == "";
+	public bool IsEmpty => string.IsNullOrEmpty(Datas);
 
 	#region Constructors
-	// Client datas is null to have the same request in client and server
+	// Client is null on a client side
 	public Request(RequestType requestType, string datas)
 	{
 		RequestType = requestType;
@@ -21,7 +20,7 @@ public class Request : IBitWritable
 		Client = null;
 	}
 
-	// Client handler will add his datas before sending
+	// Client handler will add a client reference before sending
 	public Request(Request request, Client client)
 	{
 		RequestType = request.RequestType;
@@ -45,7 +44,8 @@ public class Request : IBitWritable
 	#endregion
 
 	// Use by MLAPI to transfer a request
-	public void Read(Stream stream)
+	#region Read And Write
+	public void Read(System.IO.Stream stream)
 	{
 		using (PooledBitReader reader = PooledBitReader.Get(stream))
 		{
@@ -55,7 +55,7 @@ public class Request : IBitWritable
 		}
 	}
 
-	public void Write(Stream stream)
+	public void Write(System.IO.Stream stream)
 	{
 		using (PooledBitWriter writer = PooledBitWriter.Get(stream))
 		{
@@ -63,6 +63,7 @@ public class Request : IBitWritable
 			writer.WriteByte((byte)RequestType);
 		}
 	}
+	#endregion
 
 	public void ShowContent()
 	{
