@@ -6,32 +6,23 @@
 
 using System.Collections;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-// Structure représentant la page d'un dialogue
-// (texte et la couleur)
-[System.Serializable]
-public struct DialogPage
-{
-	public string text;
-	public Color color;
-}
 
 // S'occupe d'afficher un dialogue
 public class DialogManager : MonoBehaviour
 {
-	public Text renderText;                                             // Texte dans lequel le dialogue est écrit
+	public TextMeshProUGUI renderText;                                             // Texte dans lequel le dialogue est écrit
 
 	// Si un dialogue est actuellement à l'écran
 	public bool IsOnScreen => gameObject.activeSelf;
-	private bool IsThereAnotherDialog => dialogToDisplay.Count > 0;     // S'il y a un autre dialogue à afficher
 
 	private Coroutine _writeDialogue = null;                            // Coroutine du texte permettant de l'arrêter
-	private List<DialogPage> dialogToDisplay;                           // Dialogues à écrire
+	private Message dialogToDisplay;								    // Message à écrire
 
 	public Action OnEndDialogue;                                        // Évènement de fin de dialogue
+	public bool Switch;
 
 	// Update is called once per frame
 	void Update()
@@ -44,33 +35,34 @@ public class DialogManager : MonoBehaviour
 		// Supprime la premiére page quand le joueur appuie sur la barre espace
 		if (Input.GetKeyDown(KeyCode.Space))
 		{
-			dialogToDisplay.RemoveAt(0);    //On suprrime un emplacement de la liste avec son contenu
+			
 			DisplayDialog();
 		}
 	}
 
 	// Définie le dialogue à afficher
-	public void SetDialog(List<DialogPage> dialogToAdd)
+	public void SetDialog(Message dialogToAdd)
 	{
-		dialogToDisplay = new List<DialogPage>(dialogToAdd);
+		
+		dialogToDisplay = dialogToAdd;
 
-		if (dialogToDisplay.Count > 0)
+		if (renderText != null)
 		{
-			if (renderText != null)
-			{
-				renderText.text = "";
-			}
-
-			gameObject.SetActive(true);
-			DisplayDialog();
+			renderText.text = "";
 		}
+		Switch = true;
+		gameObject.SetActive(true);
+		DisplayDialog();
 	}
 
 	private void DisplayDialog()
 	{
-		// Affiche un dialogue tant qu'il en reste dans la liste
-		if (IsThereAnotherDialog)
+		
+		if (Switch)
+
 		{
+			Switch = false;
+
 			// Efface la coroutine déjà présente si le joueur skip le texte
 			if (_writeDialogue != null)
 			{
@@ -78,7 +70,7 @@ public class DialogManager : MonoBehaviour
 			}
 
 			_writeDialogue = StartCoroutine(WriteDialogue());
-			renderText.color = dialogToDisplay[0].color;    //RenderText.color récupère la couleur qu'il y a dans la liste
+			
 		}
 		else
 		{
@@ -90,7 +82,7 @@ public class DialogManager : MonoBehaviour
 	private IEnumerator WriteDialogue()
 	{
 		renderText.text = "";
-		foreach (var letter in dialogToDisplay[0].text)
+		foreach (var letter in dialogToDisplay.GetMessageContent)
 		{
 			renderText.text += letter;
 			yield return new WaitForEndOfFrame();

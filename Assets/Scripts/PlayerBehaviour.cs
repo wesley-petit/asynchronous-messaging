@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 
 public class PlayerBehaviour : MonoBehaviour
@@ -26,6 +23,7 @@ public class PlayerBehaviour : MonoBehaviour
             if (m_closestNPCDialog != null)
             {
                 m_dialogDisplayer.SetDialog(m_closestNPCDialog.GetDialog());
+               
             }
 
         }
@@ -37,6 +35,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.GetComponent<Dialog>())
         {
             m_closestNPCDialog = collision.GetComponent<Dialog>();
+           
         }
         
     }

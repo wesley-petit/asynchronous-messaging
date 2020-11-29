@@ -4,15 +4,13 @@
  * 
  */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Dialog : MonoBehaviour {
-    public List<DialogPage> m_dialogWithPlayer;
+    public Message m_dialogWithPlayer;
 
 
-    public List<DialogPage> GetDialog()
+    public Message GetDialog()
     {
         return m_dialogWithPlayer;
     }
