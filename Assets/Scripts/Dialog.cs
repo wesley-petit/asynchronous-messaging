@@ -12,6 +12,18 @@ public class Dialog : MonoBehaviour {
 
     public Message GetDialog()
     {
+
         return m_dialogWithPlayer;
+
     }
+
+	// Définie le dialogue à afficher
+	public void SetDialog(Message dialogToAdd)
+	{
+
+        m_dialogWithPlayer = dialogToAdd;
+
+	}
 }
+
+

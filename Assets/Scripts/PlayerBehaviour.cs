@@ -1,11 +1,12 @@
 ﻿using UnityEngine;
-
+using TMPro;
 
 public class PlayerBehaviour : MonoBehaviour
 {
     
     private Dialog m_closestNPCDialog; // Contient le dialogue du NPC à coté du joueur
     public DialogManager m_dialogDisplayer; //
+    public TextMeshProUGUI InfoMessage;
 
     void Awake() //Définir les variables de controle
     {
@@ -35,7 +36,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.GetComponent<Dialog>())
         {
             m_closestNPCDialog = collision.GetComponent<Dialog>();
-           
+            InfoMessage.enabled = true;
         }
         
     }
@@ -45,6 +46,7 @@ public class PlayerBehaviour : MonoBehaviour
         if (collision.GetComponent<Dialog>())
         {
             m_closestNPCDialog = null;
+            InfoMessage.enabled = false;
         }
         
     }
