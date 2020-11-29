@@ -1,10 +1,12 @@
-﻿// Datas send in a request / Paste in a JSON
+﻿using System;
+
+// Datas send in a request / Paste in a JSON
 // Each Save and Load value must be marked as a SerializeField
 /* ==================================================== Request Datas ======================================================== */
 
 // Class contains only arrays to serialize an specefic array and not the original array
 #region Array Class
-[System.Serializable]
+[Serializable]
 public class Messages
 {
 	[UnityEngine.SerializeField] private Message[] messages = new Message[0];
@@ -22,7 +24,7 @@ public class Messages
 	}
 }
 
-[System.Serializable]
+[Serializable]
 public class MessagesPremades
 {
 	[UnityEngine.SerializeField] private string[] messagesPremades = new string[0];
@@ -41,21 +43,24 @@ public class MessagesPremades
 }
 #endregion
 
-[System.Serializable]
+[Serializable]
 public class Ping
 {
-	[UnityEngine.SerializeField] private int _sendTime;
-	[UnityEngine.SerializeField] private string _ping;
+	[UnityEngine.SerializeField] private string _sendTime = "";
+	[UnityEngine.SerializeField] private string _ping = "";
 
 	public string GetPing => _ping;
 
-	public Ping() => _sendTime = GetTime();
+	private DateTime GetTime => DateTime.Now;
+
+	public Ping() => _sendTime = GetTime.ToString();
 
 	public void CalcultatePing()
 	{
-		int diffTime = GetTime() - _sendTime;
-		_ping = diffTime.ToString();
+		if (DateTime.TryParse(_sendTime, out DateTime sendTime))
+		{
+			TimeSpan diff = GetTime - sendTime;
+			_ping = diff.TotalMilliseconds.ToString();
+		}
 	}
-
-	private int GetTime() => System.DateTime.Now.Millisecond;
 }
