@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -666,6 +666,11 @@ PrefabInstance:
         type: 3}
       propertyPath: _dbController._database.messages_premades.Array.data[0]
       value: Nice day for fishing, ain't it?
+      objectReference: {fileID: 0}
+    - target: {fileID: 431257023879951817, guid: 8e0d91c128f3b3149a19837def00971a,
+        type: 3}
+      propertyPath: _dbController._aroundThreshold
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8e0d91c128f3b3149a19837def00971a, type: 3}
