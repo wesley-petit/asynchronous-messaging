@@ -30,7 +30,10 @@ public class UIManager : MonoBehaviour
 		}
 	}
 
-	private void Start() => SendMessagesPremades();
+	private void Start() 
+	{ 
+		SendMessagesPremades(); 
+	}
 
 	#region Invoke Callbacks
 	public void SetMessagePremade(string[] messagesPremades) => OnMessagePremade?.Invoke(messagesPremades);

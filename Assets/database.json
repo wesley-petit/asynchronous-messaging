@@ -9,36 +9,6 @@
                 "y": 5.0,
                 "z": 5.0
             }
-        },
-        {
-            "User_Name": "Kit",
-            "Message_Content": "Test 123",
-            "Message_Time": "29/11/2020 18:15:45",
-            "Position_Message": {
-                "x": 0.0,
-                "y": 0.0,
-                "z": 0.0
-            }
-        },
-        {
-            "User_Name": "Kit",
-            "Message_Content": "Test 3",
-            "Message_Time": "29/11/2020 22:00:22",
-            "Position_Message": {
-                "x": 0.5920615196228027,
-                "y": 1.0799999237060547,
-                "z": -3.721461772918701
-            }
-        },
-        {
-            "User_Name": "Kit",
-            "Message_Content": "Un truc de fou",
-            "Message_Time": "29/11/2020 22:00:35",
-            "Position_Message": {
-                "x": 10.47829818725586,
-                "y": 1.0799999237060547,
-                "z": 1.634995698928833
-            }
         }
     ],
     "messages_premades": [
