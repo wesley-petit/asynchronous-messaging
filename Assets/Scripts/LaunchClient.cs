@@ -3,5 +3,5 @@ using UnityEngine;
 
 public class LaunchClient : MonoBehaviour
 {
-	private void Start() => NetworkingManager.Singleton.StartClient();
+	public void StartClient() => NetworkingManager.Singleton.StartClient();
 }

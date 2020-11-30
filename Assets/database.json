@@ -1,17 +1,11 @@
 {
-    "messages": [
-        {
-            "User_Name": "NullReferenceException",
-            "Message_Content": "Hello World !",
-            "Message_Time": "2020-11-13",
-            "Position_Message": {
-                "x": 5.0,
-                "y": 5.0,
-                "z": 5.0
-            }
-        }
-    ],
+    "messages": [],
     "messages_premades": [
-        "Nice day for fishing, ain't it?"
+        "K.I.S.S. : Keep It Stupid Simple",
+        "Rubber duck debugging",
+        "Teste ton jeu si tu ne veux pas qu�on te d�teste",
+        "Coding yourself Into the corner",
+        "It's never gonna crash because you all write awesome code",
+        "In this case, its quite safe, as I programmed it"
     ]
 }

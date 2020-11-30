@@ -8,7 +8,7 @@ public class FPSLook : MonoBehaviour
 	[SerializeField] private Transform _cameraTransform = null;
 	[SerializeField] private float _limitCameraRotation = 90f;
 	[SerializeField] private CursorLockMode _cursorMode = CursorLockMode.Locked;
-	
+
 	private InputController _inputs;
 	private float _xRotation = 0f;
 

@@ -12,10 +12,10 @@ GameObject:
   - component: {fileID: 1700289428482190680}
   - component: {fileID: 7024284771675069364}
   - component: {fileID: -4474858314190491296}
-  - component: {fileID: 3927998676508760298}
-  - component: {fileID: 243772191696488194}
+  - component: {fileID: 1268990065853640422}
+  - component: {fileID: -7864760220441927193}
   m_Layer: 0
-  m_Name: ServerShareObject
+  m_Name: ClientShareObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ MonoBehaviour:
   PrefabHashGenerator: "ObjetPartag\xE9"
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
---- !u!114 &3927998676508760298
+--- !u!114 &1268990065853640422
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,10 +106,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1467226626959735877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02221885bb45aa34c9f394539fb09c92, type: 3}
+  m_Script: {fileID: 11500000, guid: a1eabeb2d5cfe534a98c2a1b17028c94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &243772191696488194
+--- !u!114 &-7864760220441927193
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1467226626959735877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2194df60cb7e1c4bb71f71d16ddcd7b, type: 3}
+  m_Script: {fileID: 11500000, guid: b9ca30d3a135c8b40b8c6b753767a1a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _client: {fileID: 3927998676508760298}
+  _client: {fileID: 1268990065853640422}
