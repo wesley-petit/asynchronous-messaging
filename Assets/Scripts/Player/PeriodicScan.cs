@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class PeriodicScan : MonoBehaviour
 {
@@ -13,12 +14,13 @@ public class PeriodicScan : MonoBehaviour
 	{
 		_oldPlayerPos = _playerPos.position;
 		UIManager.Instance.OnScanMessage += OnMessageReceived;
+		StartCoroutine(Scan());
 	}
 
 	// Update is called once per frame
 	void FixedUpdate()
 	{
-		if (Vector3.Distance(_oldPlayerPos, _playerPos.position) > _distanceUntilUpdate) UpdatePosition();
+		
 	}
 
 	void UpdatePosition()
@@ -30,5 +32,15 @@ public class PeriodicScan : MonoBehaviour
 	void OnMessageReceived(Message[] messages)
 	{
 		display.DisplayMessagesFromList(messages);
+	}
+
+	IEnumerator Scan()
+    {
+		while (true)
+		{
+			yield return new WaitUntil(() => Vector3.Distance(_oldPlayerPos, _playerPos.position) > _distanceUntilUpdate);
+			UIManager.Instance.SendScanMessage(_playerPos.position);
+			_oldPlayerPos = _playerPos.position;
+		}
 	}
 }
